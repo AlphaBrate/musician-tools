@@ -1,0 +1,719 @@
+:root {
+	/* Light theme colors */
+	--color-bg: #f0f4f7;
+	--color-bg-alt: #f5f7fa;
+	--color-text: #222222;
+	--color-primary: #2563eb;
+	--color-secondary: #64748b;
+	--color-border: #e5e7eb;
+	--color-accent: #f59e42;
+	--color-extreme: #000000;
+}
+
+@media (prefers-color-scheme: dark) {
+	:root {
+		--color-bg: #18181b;
+		--color-bg-alt: #232336;
+		--color-text: #f3f4f6;
+		--color-primary: #60a5fa;
+		--color-secondary: #94a3b8;
+		--color-border: #2d2d3a;
+		--color-accent: #fbbf24;
+		--color-extreme: #ffffff;
+	}
+}
+
+a {
+	color: var(--color-text);
+}
+
+.nowrap {
+	white-space: nowrap;
+}
+
+.extreme {
+	color: var(--color-extreme);
+	font-weight: 700;
+	text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+	opacity: 1;
+	position: absolute;
+	font-size: 2rem;
+}
+
+.done {
+	opacity: 0;
+	color: green;
+	font-weight: 700;
+	font-size: 2rem;
+}
+
+body {
+	overflow: hidden;
+	background-color: var(--color-bg);
+	color: var(--color-text);
+	font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+		Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
+		sans-serif;
+}
+
+.metronome {
+	--swing-duration: 1s;
+	--tempo-position: -10%;
+	--time-signature-position: 0%;
+	--tempo-pixel-position: 0px;
+	--blur-radius: 0px;
+	user-select: none;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.metronome-panel {
+	position: absolute;
+	top: 50%;
+	left: calc(65% + var(--tempo-pixel-position) / 5);
+	transform: translate(-50%, -50%);
+	height: 100%;
+	width: 30%;
+}
+
+.metronome-panel .ui > span.tempo {
+	position: absolute;
+	font-family: "Helvetica Neue";
+	font-style: normal;
+	font-weight: 700;
+	font-size: 5rem;
+	background: linear-gradient(
+		90deg,
+		rgba(0, 235, 255, 0.19) 3.06%,
+		rgba(255, 255, 255, 0.3) 102.5%
+	);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	background-clip: text;
+	text-fill-color: transparent;
+	position: absolute;
+	top: calc(var(--tempo-pixel-position) - 25pt);
+	left: 0;
+	filter: blur(calc(var(--blur-radius) / 4));
+	transition: transform 0.5s ease-in-out;
+}
+
+.metronome-panel .ui > span.tempo::before {
+	content: "";
+	position: absolute;
+	top: 50%;
+	right: 55%;
+	transform: translateX(-50%);
+	height: 1px;
+	width: 0%;
+	background: rgba(139, 164, 187, 0.4);
+	display: flex;
+	box-shadow: 0 0 rgb(255, 255, 255);
+	opacity: 0;
+	transition: 0.5s ease-in-out;
+}
+
+.metronome-panel .ui > span.tempo::after {
+	content: "BPM";
+	font-size: 1.5rem;
+	font-weight: 500;
+	margin-left: 0.5rem;
+}
+
+.metronome-panel .ui > span.up {
+	font-family: "Helvetica Neue";
+	font-style: normal;
+	font-weight: 700;
+	font-size: 5rem;
+	background: linear-gradient(
+		90deg,
+		rgba(0, 235, 255, 0.19) 3.06%,
+		rgba(255, 255, 255, 0.3) 102.5%
+	);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	background-clip: text;
+	text-fill-color: transparent;
+	position: absolute;
+	top: calc(var(--tempo-pixel-position) - 90pt);
+	left: 2pt;
+	transform: rotate(-90deg);
+	opacity: calc(var(--blur-radius) / 50px);
+	visibility: hidden;
+}
+
+.metronome-panel .ui > span.down {
+	font-family: "Helvetica Neue";
+	font-style: normal;
+	font-weight: 700;
+	font-size: 5rem;
+	background: linear-gradient(
+		90deg,
+		rgba(0, 235, 255, 0.19) 3.06%,
+		rgba(255, 255, 255, 0.3) 102.5%
+	);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	background-clip: text;
+	text-fill-color: transparent;
+	position: absolute;
+	top: calc(var(--tempo-pixel-position) + 30pt);
+	left: 2pt;
+	transform: rotate(90deg);
+	opacity: calc(var(--blur-radius) / 50px);
+	visibility: hidden;
+	transition: opacity 0s ease-in-out;
+}
+
+.metronome-panel .ui > span.almost-reaches-top {
+	font-family: "Helvetica Neue";
+	font-style: normal;
+	font-weight: 500;
+	font-size: 16pt;
+	color: var(--color-secondary);
+	position: absolute;
+	top: calc(var(--tempo-pixel-position) + 40pt);
+	left: 2pt;
+	opacity: 0;
+}
+
+.metronome-panel .ui > span.almost-reaches-bottom {
+	font-family: "Helvetica Neue";
+	font-style: normal;
+	font-weight: 500;
+	font-size: 16pt;
+	color: var(--color-secondary);
+	position: absolute;
+	top: calc(var(--tempo-pixel-position) - 70pt);
+	left: 2pt;
+	opacity: 0;
+}
+
+@media (prefers-color-scheme: light) {
+	.metronome-panel .ui > span.tempo,
+	.metronome-panel .ui > span.up,
+	.metronome-panel .ui > span.down {
+		background: linear-gradient(
+			90deg,
+			rgba(25, 101, 177, 0.19) 3.06%,
+			rgba(255, 107, 107, 0.3) 102.5%
+		);
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+		background-clip: text;
+	}
+}
+
+.metronome.up .metronome-panel .ui > span.up {
+	visibility: visible;
+}
+
+.metronome.down .metronome-panel .ui > span.down {
+	visibility: visible;
+}
+
+.metronome.at-min .metronome-panel .ui > span.up {
+	visibility: visible;
+	opacity: 1 !important;
+	transition: opacity 0.5s ease-in-out;
+}
+
+.metronome.at-limit .metronome-panel .ui > span.almost-reaches-bottom,
+.metronome.at-limit .metronome-panel .ui > span.almost-reaches-top {
+	.extreme {
+		opacity: 0;
+	}
+
+	.done {
+		opacity: 1;
+	}
+}
+
+.metronome.at-max .metronome-panel .ui > span.down {
+	visibility: visible;
+	opacity: 1 !important;
+	transition: opacity 0.5s ease-in-out;
+}
+
+.metronome-body {
+	transition: transform 0.5s ease-in-out, background 0.5s ease-in-out;
+	position: absolute;
+	width: min(40vw, calc(70vh * 0.7));
+	height: min(calc(40vw / 0.7), 70vh);
+}
+
+.metronome-body .metronome-component {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-repeat: no-repeat;
+	background-size: contain;
+	background-position: center;
+}
+
+.metronome-body .time-signature-adjuster {
+	position: absolute;
+	left: calc(20% + var(--time-signature-position));
+	bottom: 25%;
+	height: 5%;
+	width: 80%;
+	background-repeat: no-repeat;
+	background-size: contain;
+	background-position: center;
+	background-image: url("../assets/metronome/time-signature-adjuster.svg");
+
+	transition: left 0.1s ease-in-out;
+}
+
+.metronome-body
+	.time-signature-adjuster-instance:hover
+	~ .time-signature-adjuster-ruler,
+.metronome-body
+	.time-signature-adjuster-instance:hover
+	~ .time-signature-adjuster-numbers,
+.metronome-body
+	.time-signature-adjuster-instance.show
+	~ .time-signature-adjuster-ruler,
+.metronome-body
+	.time-signature-adjuster-instance.show
+	~ .time-signature-adjuster-numbers {
+	transform: translateX(40%) translateY(-2pt);
+	transition: 0.3s ease-in-out;
+	opacity: 0.5;
+}
+
+.metronome-body
+	.time-signature-adjuster-instance:active
+	~ .time-signature-adjuster-ruler,
+.metronome-body
+	.time-signature-adjuster-instance:active
+	~ .time-signature-adjuster-numbers {
+	transform: translateX(40%) translateY(0pt);
+	opacity: 1;
+}
+
+.metronome-body
+	.time-signature-adjuster-instance:active
+	~ .time-signature-adjuster-numbers {
+	transform: translateX(40%) translateY(3pt);
+}
+
+.metronome-body .time-signature-adjuster-ruler,
+.metronome-body .time-signature-adjuster-numbers {
+	opacity: 0;
+	position: absolute;
+	right: 0;
+	transform: translateX(40%) translateY(-5%);
+	bottom: 5%;
+	height: 20%;
+	width: 60%;
+
+	transition: opacity 0.7s ease-in-out, transform 1s ease-in-out;
+	overflow: visible;
+
+	z-index: 11;
+}
+
+.metronome-body .time-signature-adjuster-ruler {
+	mask: linear-gradient(
+		90deg,
+		rgba(255, 255, 255, 0) 42%,
+		#ffffff 50%,
+		rgba(255, 255, 255, 0) 85%
+	);
+}
+
+.metronome-body .time-signature-adjuster-numbers {
+	mask: linear-gradient(
+		90deg,
+		rgba(255, 255, 255, 0) 45%,
+		#ffffff 60%,
+		#ffffff 75%,
+		rgba(255, 255, 255, 0) 85%
+	);
+}
+
+.metronome-body .time-signature-adjuster-ruler .lines {
+	position: absolute;
+	right: calc(-2 * var(--time-signature-position));
+	transform: translateX(-3%);
+	height: 25%;
+	width: 100%;
+	background-repeat: no-repeat;
+	background-size: contain;
+	background-image: url("../assets/metronome/ruler.svg");
+
+	transition: right 0.1s ease-in-out;
+}
+
+.metronome-body .time-signature-adjuster-numbers .numbers {
+	position: absolute;
+	top: 25%;
+	left: calc(var(--time-signature-position) * 9 - 3rem);
+	height: 20%;
+	width: 100%;
+	display: flex;
+	padding: 0 5%;
+	font-family: "Helvetica Neue";
+	font-style: normal;
+	font-weight: 500;
+	font-size: 10pt;
+	color: var(--color-secondary);
+	pointer-events: none;
+	transition: 0.1s ease;
+
+	.number {
+		margin-right: 1rem;
+		font-size: 16pt;
+		height: 25pt;
+		width: 25pt;
+		border-radius: 50%;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		transition: background 0.3s ease, color 0.3s ease;
+	}
+
+	.highlight {
+		background: #00bfff;
+		color: black;
+	}
+}
+
+.metronome-body .time-signature-adjuster-instance {
+	z-index: 9;
+	position: absolute;
+	right: -10%;
+	bottom: 25%;
+	height: 5%;
+	width: 35%;
+	background-repeat: no-repeat;
+	background-size: contain;
+	background-position: center;
+	cursor: grab;
+}
+
+.metronome-body .fixed-metronome-body {
+	background-image: url("../assets/metronome/fixed-metronome-body.svg");
+}
+
+.metronome-body .swing {
+	transform-origin: 50% 100%;
+	background-image: url("../assets/metronome/swing.svg");
+}
+
+.metronome.swinging .swing {
+	animation: swing var(--swing-duration) ease-in-out infinite alternate;
+}
+
+@keyframes swing {
+	0% {
+		transform: rotate(-30deg);
+	}
+	100% {
+		transform: rotate(30deg);
+	}
+}
+
+.metronome-body .swing .tempo-set {
+	position: absolute;
+	top: calc(50% + var(--tempo-position));
+	left: 50%;
+	transform: translate(-50%, -50%);
+	height: 8%;
+	width: 8%;
+	cursor: grab;
+	background-repeat: no-repeat;
+	background-size: contain;
+	background-position: center;
+	background-image: url("../assets/metronome/tempo-set.svg");
+	transition: transform 0.1s ease-in-out, opacity 0.1s ease-in-out,
+		filter 0.1s ease-in-out;
+}
+
+.metronome-body .swing .tempo-set:hover {
+	transform: translate(-50%, -50%) scale(0.98);
+}
+
+.metronome-body .swing .tempo-set:active {
+	opacity: 0.8;
+}
+
+.metronome-body .swing .swing-instance {
+	position: absolute;
+	top: 0;
+	left: 50%;
+	transform: translateX(-50%);
+	height: 70%;
+	width: 10%;
+	cursor: grab;
+	background-repeat: no-repeat;
+	background-size: contain;
+	background-position: center;
+}
+
+.metronome-body .cover {
+	background-image: url("../assets/metronome/cover.svg");
+	pointer-events: none;
+}
+
+.metronome-tempo-background {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	z-index: -1;
+	opacity: 0;
+	transition: opacity 0.5s ease-in-out;
+	background: conic-gradient(
+		from 163.78deg at 43.19% 52.78%,
+		rgba(178, 108, 207, 0.1) 0deg,
+		rgba(255, 255, 255, 0.04) 84.81deg,
+		rgba(255, 255, 255, 0.05) 166.51deg,
+		rgba(236, 209, 66, 0.12) 230.19deg,
+		rgba(255, 0, 0, 0.06) 294.23deg,
+		rgba(178, 108, 207, 0.1) 360deg
+	);
+	background: conic-gradient(
+		from 163.78deg at 43.19% 52.78%,
+		color(display-p3 0.659 0.435 0.788 / 0.1) 0deg,
+		color(display-p3 1 1 1 / 0.04) 84.81deg,
+		color(display-p3 1 1 1 / 0.05) 166.51deg,
+		color(display-p3 0.91 0.824 0.369 / 0.12) 230.19deg,
+		color(display-p3 1 0.141 0.141 / 0.06) 294.23deg,
+		color(display-p3 0.659 0.435 0.788 / 0.1) 360deg
+	);
+}
+
+.metronome.dragging {
+	.metronome-body {
+		transform: translateX(-20%);
+	}
+	.metronome-body > .swing > .tempo-set,
+	.metronome-body > .swing > .swing-instance {
+		filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.5));
+		-webkit-filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.5));
+	}
+	.metronome-tempo-background {
+		opacity: 0.6;
+		transition: 2s;
+	}
+	.metronome-panel .ui > .tempo {
+		opacity: 1;
+	}
+	.metronome-panel .ui > .tempo::before {
+		opacity: 1;
+		width: 100%;
+	}
+	.metronome-panel .ui > span.almost-reaches-top {
+		opacity: 1;
+	}
+}
+
+.metronome:not(.dragging) {
+	.metronome-panel .ui > span.almost-reaches-top,
+	.metronome-panel .ui > span.almost-reaches-bottom,
+	.metronome-panel .ui > span.down,
+	.metronome-panel .ui > span.up {
+		opacity: 0 !important;
+	}
+	.metronome-panel .ui > .tempo {
+		transform: translateX(40pt);
+	}
+}
+
+.metronome.swinging .metronome-body .swing .tempo-set {
+	pointer-events: none;
+}
+
+.metronome.swinging .metronome-body .swing .swing-instance {
+	width: 50%;
+}
+
+.metronome.precise-dragging .almost-reaches-top,
+.metronome.precise-dragging .almost-reaches-bottom {
+	opacity: 0 !important;
+}
+.extended-ui {
+	background: rgba(255, 255, 255, 0.1);
+	backdrop-filter: blur(10px);
+	border-radius: 20px;
+	padding: 25px;
+	border: 1px solid rgba(255, 255, 255, 0.2);
+	box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1),
+		inset 0 1px 0 rgba(255, 255, 255, 0.1),
+		inset 0 -1px 0 rgba(0, 0, 0, 0.05);
+	margin: 20px;
+	max-width: 400px;
+	animation: fadeIn 0.6s ease-out;
+	display: none;
+}
+
+#bpm-input {
+	background: rgba(255, 255, 255, 0.08);
+	border: 1px solid rgba(255, 255, 255, 0.15);
+	border-radius: 15px;
+	padding: 15px 20px;
+	color: white;
+	font-size: 24px;
+	font-weight: 600;
+	text-align: center;
+	backdrop-filter: blur(5px);
+	box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1), 0 2px 8px rgba(0, 0, 0, 0.1);
+	transition: all 0.3s ease;
+	width: 100px;
+	margin-bottom: 20px;
+}
+
+#bpm-input:focus {
+	outline: none;
+	background: rgba(255, 255, 255, 0.15);
+	border-color: rgba(255, 255, 255, 0.3);
+	box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.2),
+		0 0 0 3px rgba(255, 255, 255, 0.1);
+}
+
+.tools {
+	display: flex;
+	gap: 12px;
+	flex-wrap: wrap;
+}
+
+.tools button {
+	background: rgba(255, 255, 255, 0.08);
+	border: 1px solid rgba(255, 255, 255, 0.15);
+	border-radius: 12px;
+	padding: 12px;
+	color: white;
+	font-size: 0;
+	font-weight: 500;
+	backdrop-filter: blur(5px);
+	cursor: pointer;
+	transition: all 0.3s ease;
+	flex: 1;
+	width: 36px;
+	height: 36px;
+	position: relative;
+	overflow: hidden;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.tools button img {
+	width: 24px;
+	height: 24px;
+}
+
+.tools button::before {
+	content: "";
+	position: absolute;
+	top: 0;
+	left: -100%;
+	width: 100%;
+	height: 100%;
+	background: linear-gradient(
+		90deg,
+		transparent,
+		rgba(255, 255, 255, 0.1),
+		transparent
+	);
+	transition: left 0.5s ease;
+}
+
+.tools button:hover::before {
+	left: 100%;
+}
+
+.tools button:hover {
+	background: rgba(255, 255, 255, 0.15);
+	border-color: rgba(255, 255, 255, 0.25);
+	transform: translateY(-2px);
+	box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2),
+		inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.tools button:active {
+	transform: translateY(0);
+	background: rgba(255, 255, 255, 0.05);
+	box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2), 0 1px 4px rgba(0, 0, 0, 0.1);
+}
+
+.tools button:focus {
+	outline: none;
+	box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.2),
+		inset 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+#mute-button {
+	background: rgba(255, 100, 100, 0.15);
+	border-color: rgba(255, 100, 100, 0.3);
+}
+
+#mute-button img {
+	content: url("../assets/metronome/mute.svg");
+}
+
+#mute-button.muted img {
+	content: url("../assets/metronome/unmute.svg");
+}
+
+#reset-button {
+	background: rgba(100, 200, 255, 0.15);
+	border-color: rgba(100, 200, 255, 0.3);
+}
+
+#reset-button img {
+	content: url("../assets/metronome/reset.svg");
+}
+
+#tap-tempo-button {
+	background: rgba(100, 255, 150, 0.15);
+	border-color: rgba(100, 255, 150, 0.3);
+}
+
+#tap-tempo-button img {
+	content: url("../assets/metronome/gesture.svg");
+}
+
+@keyframes fadeIn {
+	from {
+		opacity: 0;
+		transform: translateY(20px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+.hud {
+	position: absolute;
+	inset: auto 16px 16px auto;
+	z-index: 1;
+	text-align: right;
+	opacity: 0.9;
+	font-variant-numeric: tabular-nums;
+	user-select: none;
+}
+
+.hud h1 {
+	margin: 0;
+	font-size: 18px;
+}
+
+.hud p {
+	margin: 2px 0 0 0;
+	font-size: 12px;
+	opacity: 0.8;
+}

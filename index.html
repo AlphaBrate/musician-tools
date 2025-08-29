@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Metronome - Musician Tools</title>
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+
+<body>
+    <div class="metronome">
+        <div class="metronome-panel">
+            <div class="ui">
+                <span class="up">》</span>
+                <span class="almost-reaches-top">
+                    Continue dragging
+                    <span class="extreme">↑</span>
+                    <span class="done">✓</span>
+                    <br> to extend the tempo.
+                </span>
+                <span class="tempo">120</span>
+                <span class="down">》</span>
+                <span class="almost-reaches-bottom">
+                    Continue dragging
+                    <span class="extreme">↓</span>
+                    <span class="done">✓</span>
+                    <br> to extend the tempo.
+                </span>
+                <div class="extended-ui">
+                    <input type="number" name="bpm" id="bpm-input" value="120">
+                    <div class="tools">
+                        <button id="mute-button"><img src="assets/metronome/mute.svg" alt="Mute"></button>
+                        <button id="reset-button"><img src="assets/metronome/reset.svg" alt="Reset"></button>
+                        <button id="tap-tempo-button"><img src="assets/metronome/gesture.svg" alt="Tap Tempo"></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="metronome-body">
+            <div class="time-signature-adjuster"></div>
+            <div class="time-signature-adjuster-instance"></div>
+            <div class="time-signature-adjuster-ruler">
+                <span class="lines"></span>
+            </div>
+            <div class="time-signature-adjuster-numbers">
+                <div class="numbers">
+                    <span class="number" id="time-signature-6">6</span>
+                    <span class="number highlight" id="time-signature-4">4</span>
+                    <span class="number" id="time-signature-3">3</span>
+                    <span class="number" id="time-signature-2">2</span>
+                    <span class="number" id="time-signature-0">0</span>
+                </div>
+            </div>
+            <div class="metronome-component fixed-metronome-body"></div>
+            <div class="metronome-component swing">
+                <span class="swing-instance"></span>
+                <span class="tempo-set"></span>
+            </div>
+            <div class="metronome-component cover"></div>
+        </div>
+        <div class="metronome-tempo-background"></div>
+    </div>
+    <div class="hud">
+        <h1 id="hudLine">ß 0.1.0 &copy; <a href="https://aphbrt.web.app/">AlphaBrate</a> 2025.</h1>
+        <p>This is a very early version. <a href="https://github.com/AlphaBrate/Musician-Tools">View on GitHub</a>.</p>
+    </div>
+    <script src="./js/script.js"></script>
+    <script src="./js/metronome-core.js"></script>
+    <script src="./js/metronome.js"></script>
+</body>
+
+</html>
