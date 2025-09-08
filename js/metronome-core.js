@@ -93,6 +93,8 @@ function getCurrentBPM() {
     return tempoStart + (tempoEnd - tempoStart) * t;
 }
 
+let lastBeatCount = 0;
+
 function scheduleTick() {
     const currentBPM = getCurrentBPM();
     const interval = 60000 / currentBPM;
@@ -107,16 +109,24 @@ function scheduleTick() {
     playClick(level);
     beatCount = (beatCount + 1) % beatsPerMeasure;
 
+    
+
+    if (beatCount < 0) beatCount = beatsPerMeasure;
+
     try {
         exeOnTick({
             bpm: currentBPM,
             volume: volume,
             timeSignature: timeSignature,
             level: level,
-            beatInMeasure: beatCount,
+            beatInMeasure: lastBeatCount,
             nextTickTime: nextTickTime
         });
     } catch {}
+
+    if (lastBeatCount !== beatCount) {
+        lastBeatCount = beatCount;
+    }
 }
 
 function startMetronome(config = {}) {

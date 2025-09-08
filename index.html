@@ -10,22 +10,23 @@
 
 <body>
     <div class="metronome">
+        <div class="beats"> </div>
         <div class="metronome-panel">
             <div class="ui">
                 <span class="up">》</span>
                 <span class="almost-reaches-top">
-                    Continue dragging
+                    <span class="text">Continue dragging</span>
                     <span class="extreme">↑</span>
                     <span class="done">✓</span>
-                    <br> to extend the tempo.
+                    <br><span class="text"> to extend the tempo.</span>
                 </span>
                 <span class="tempo">120</span>
                 <span class="down">》</span>
                 <span class="almost-reaches-bottom">
-                    Continue dragging
+                    <span class="text">Continue dragging</span>
                     <span class="extreme">↓</span>
                     <span class="done">✓</span>
-                    <br> to extend the tempo.
+                    <br><span class="text"> to extend the tempo.</span>
                 </span>
                 <div class="extended-ui">
                     <input type="number" name="bpm" id="bpm-input" value="120">
@@ -62,8 +63,8 @@
         <div class="metronome-tempo-background"></div>
     </div>
     <div class="hud">
-        <h1 id="hudLine">ß 0.1.0 &copy; <a href="https://aphbrt.web.app/">AlphaBrate</a> 2025.</h1>
-        <p>This is a very early version. <a href="https://github.com/AlphaBrate/Musician-Tools">View on GitHub</a>.</p>
+        <h1 id="hudLine">&copy; <a href="https://aphbrt.web.app/">AlphaBrate</a> 2025. By <a href="https://github.com/ChuTM/">Ming Chu</a>.</h1>
+        <p>ß 0.1.1 Early version. APEL applies. <a href="https://github.com/AlphaBrate/Musician-Tools">View on GitHub</a>.</p>
     </div>
     <script src="./js/script.js"></script>
     <script src="./js/metronome-core.js"></script>

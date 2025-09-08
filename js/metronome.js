@@ -22,6 +22,7 @@ const swingComponent = document.querySelector(
 );
 const metronomeBody = document.querySelector(".metronome-body");
 const tempoDisplay = metronome.instance.querySelector(".tempo");
+const beatsElement = document.querySelector(".beats"); // Reference to .beats element
 
 let isDragging = false;
 let dragType = null; // Track the type of dragging ('tempo', 'swing', or 'precise-tempo')
@@ -82,7 +83,23 @@ function initTempoPosition() {
 	lastTempoPosition = tempoSetPosition;
 }
 
-// Initialize time signature position
+// Update beats element with spans based on time signature
+function updateBeatsDisplay() {
+	if (beatsElement) {
+		beatsElement.innerHTML = ""; // Clear existing spans
+		const beatCount = metronome.stress;
+		for (let i = 0; i < beatCount; i++) {
+			const span = document.createElement("span");
+			span.classList.add("beat");
+			if (i === 0) {
+				span.classList.add("stress"); // First beat is stressed
+			}
+			beatsElement.appendChild(span);
+		}
+	}
+}
+
+// Initialize time signature position and beats display
 function initTimeSignaturePosition() {
 	const index = timeSignatureValues.indexOf(metronome.stress);
 	const percent = index * positionStep;
@@ -90,6 +107,7 @@ function initTimeSignaturePosition() {
 		"--time-signature-position",
 		`${percent}%`
 	);
+	updateBeatsDisplay(); // Initialize beats display
 }
 
 // Call initialization functions
@@ -204,6 +222,7 @@ function startDragging(e, type) {
 			stopMetronome();
 			metronome.playing = false;
 			metronome.instance.classList.remove("swinging");
+			metronome.instance.classList.remove("swinging-left");
 		}
 
 		dragAttempts = 0; // Reset drag attempts
@@ -245,7 +264,7 @@ function drag(e) {
 				Math.min(208, metronome.tempo + deltaY)
 			);
 
-            setTempo(metronome.tempo);
+			setTempo(metronome.tempo);
 			tempoDisplay.textContent = `${Math.round(metronome.tempo)}`; // Update tempo display
 
 			const tempoSetElement =
@@ -386,7 +405,10 @@ function drag(e) {
 					lastDragDirection = null; // Reset last direction
 					playSoundById("timeAdjust", 1.0); // Play sound on limit reached
 					metronome.instance.classList.remove("up", "down");
-                    metronome.instance.classList.add("at-limit");
+					metronome.instance.classList.add("at-limit");
+
+					
+
 					return;
 				}
 			} else {
@@ -413,7 +435,7 @@ function drag(e) {
 			}
 
 			if (changed) {
-                setTempo(metronome.tempo);
+				setTempo(metronome.tempo);
 				tempoDisplay.textContent = `${Math.round(metronome.tempo)}`; // Update display
 				setTempoPosition(metronome.tempo); // Set new tempo position
 				playSoundById("tempoAdjust", 1.0); // Play sound on adjustment
@@ -421,6 +443,7 @@ function drag(e) {
 		} else if (dragType === "swing") {
 			// Dragging the swing arm
 			metronome.instance.classList.remove("swinging");
+			metronome.instance.classList.remove("swinging-left");
 			swingComponent.style.transition = "";
 			const swingRect = swingComponent.getBoundingClientRect();
 			const pivotX = swingRect.left + swingRect.width / 2; // Calculate pivot point
@@ -460,7 +483,7 @@ function drag(e) {
 						"--tempo",
 						`${newTempo}`
 					);
-                    setTempo(newTempo);
+					setTempo(newTempo);
 					tempoDisplay.textContent = newTempo; // Update display
 					setTempoPosition(newTempo); // Set new tempo position
 				}
@@ -498,7 +521,6 @@ function stopDragging() {
 			const pivotY = swingRect.bottom;
 			const deltaXFromPivot = currentX - pivotX;
 			const deltaYFromPivot = pivotY - currentY;
-			const maxAngle = 30; // Maximum swing angle
 			lockSoundTimeStamps = []; // Clear lock sound timestamps
 			const angle =
 				Math.atan2(-deltaXFromPivot, deltaYFromPivot) * (180 / Math.PI);
@@ -506,6 +528,7 @@ function stopDragging() {
 				stopMetronome(); // Stop metronome if nearly centered
 				metronome.playing = false; // Update playing state
 				metronome.instance.classList.remove("swinging"); // Remove swinging class
+				metronome.instance.classList.remove("swinging-left");
 				swingComponent.style.transform = `rotate(0deg)`; // Reset swing position
 			} else {
 				startMetronomeWithSwing(); // Start metronome with swing
@@ -548,13 +571,28 @@ function startMetronomeWithSwing() {
 			clampedAngle = 30; // Default angle if invalid
 		}
 
-		const transitionTime =
-			(Math.abs(clampedAngle + 30) / maxAngle) * swingDuration; // Calculate transition time
-		swingComponent.style.transition = `transform ${
-			transitionTime / 2
-		}s ease-in-out`; // Set transition
+		// console.log(clampedAngle);
+		
+		let transitionTime = 0;
+		 // Calculate transition time based on current angle
 
-		swingComponent.style.transform = `rotate(${-30}deg)`; // Rotate swing to start position
+		if (clampedAngle > 0) {
+			 transitionTime =
+				(Math.abs(clampedAngle + 30) / maxAngle) * swingDuration; // Calculate transition time
+			swingComponent.style.transition = `transform ${
+				transitionTime / 2
+			}s ease-in-out`; // Set transition
+
+			swingComponent.style.transform = `rotate(${-30}deg)`; // Rotate swing to start position
+		} else {
+			 transitionTime =
+				(Math.abs(clampedAngle -30) / maxAngle) * swingDuration; // Calculate transition time
+			swingComponent.style.transition = `transform ${
+				transitionTime / 2
+			}s ease-in-out`; // Set transition
+
+			swingComponent.style.transform = `rotate(${30}deg)`; // Rotate swing to start position
+		}
 
 		setTimeout(() => {
 			startMetronome({
@@ -564,7 +602,8 @@ function startMetronomeWithSwing() {
 		}, transitionTime * 500 - swingDuration * 500); // Delay for metronome start
 
 		setTimeout(() => {
-			metronome.instance.classList.add("swinging"); // Add swinging class
+			metronome.instance.classList.add("swinging");
+			if (clampedAngle < 0) metronome.instance.classList.add("swinging-left"); // Add swinging class
 			swingComponent.style.transition = ""; // Reset transition
 		}, transitionTime * 500); // Delay for swing animation
 	}
@@ -578,6 +617,7 @@ function stopMetronomeAndSwing() {
 		const clampedAngle = getClampedSwingAngle(); // Get current clamped angle
 
 		metronome.instance.classList.remove("swinging"); // Remove swinging class
+		metronome.instance.classList.remove("swinging-left"); // Remove swinging-left class
 		swingComponent.style.transform = `rotate(${clampedAngle}deg)`; // Set swing to current angle
 		setTimeout(() => {
 			swingComponent.style.transition = `transform 0.5s ease-in-out`; // Set transition
@@ -671,6 +711,7 @@ function dragTimeSignature(e) {
 				"--time-signature-position",
 				`${percent}%`
 			);
+			updateBeatsDisplay(); // Update beats display
 			playSoundById("timeAdjust", 1.0); // Play sound on adjustment
 		}
 
@@ -708,6 +749,15 @@ function exeOnTick(data) {
 		setTimeout(() => {
 			metronome.instance.style.backgroundColor = ""; // Reset background color
 		}, 10); // Duration for flash
+	}
+
+	// Highlight the current beat
+	if (beatsElement) {
+		const beats = beatsElement.querySelectorAll(".beat");
+		beats.forEach((beat, index) => {
+			beat.classList.remove("light-up");
+			beats[data.beatInMeasure].classList.add("light-up");
+		});
 	}
 }
 
@@ -750,7 +800,7 @@ function handleKeyboard(e) {
 
 // Update tempo display and UI
 function updateTempo() {
-    setTempo(metronome.tempo);
+	setTempo(metronome.tempo);
 	tempoDisplay.textContent = `${metronome.tempo}`; // Update display
 	setTempoPosition(metronome.tempo); // Update tempo position
 	playSoundById("tempoAdjust", 1.0); // Play sound on adjustment
@@ -773,6 +823,7 @@ function adjustTimeSignature(direction) {
 			"--time-signature-position",
 			`${percent}%`
 		);
+		updateBeatsDisplay(); // Update beats display
 		playSoundById("timeAdjust", 1.0); // Play sound on adjustment
 		const currentNumber = document.querySelector(
 			`#time-signature-${timeSignatureValues[currentIndex]}`
@@ -836,7 +887,7 @@ function tapTempo() {
 }
 
 function setTempo(tempo) {
-    metronome.tempo = tempo;
-    tempoDisplay.textContent = metronome.tempo;
-    setTempoPosition(metronome.tempo);
+	metronome.tempo = tempo;
+	tempoDisplay.textContent = metronome.tempo;
+	setTempoPosition(metronome.tempo);
 }

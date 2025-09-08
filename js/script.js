@@ -35,9 +35,8 @@ const preferences = {
 };
 
 // Check if the user is on a mobile device
-const isMobile = window.matchMedia("(max-width: 767px)").matches;
+const isMobile = window.matchMedia("(max-width: 768px)").matches;
 
 if (isMobile) {
-	alert('This is a very early version of the app. We have not yet optimized it for mobile devices.');
 	alert('Features may not work as expected on your device.');
 }
