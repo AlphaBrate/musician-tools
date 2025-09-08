@@ -67,6 +67,10 @@ body {
 	-moz-user-select: none;
 	-ms-user-select: none;
 	position: absolute;
+	margin: 0;
+	padding: 0;
+	top: 0;
+	left: 0;
 	width: 100%;
 	height: 100%;
 	display: flex;
@@ -480,24 +484,48 @@ body {
 	z-index: -1;
 	opacity: 0;
 	transition: opacity 0.5s ease-in-out;
+
 	background: conic-gradient(
-		from 163.78deg at 43.19% 52.78%,
-		rgba(178, 108, 207, 0.1) 0deg,
-		rgba(255, 255, 255, 0.04) 84.81deg,
-		rgba(255, 255, 255, 0.05) 166.51deg,
-		rgba(236, 209, 66, 0.12) 230.19deg,
-		rgba(255, 0, 0, 0.06) 294.23deg,
-		rgba(178, 108, 207, 0.1) 360deg
+		from 169.54deg at 43.19% 52.78%,
+		#210d23 0deg,
+		#131311 84.81deg,
+		#171811 166.51deg,
+		#2e2804 230.19deg,
+		#240006 294.23deg,
+		#210d23 360deg
 	);
 	background: conic-gradient(
-		from 163.78deg at 43.19% 52.78%,
-		color(display-p3 0.659 0.435 0.788 / 0.1) 0deg,
-		color(display-p3 1 1 1 / 0.04) 84.81deg,
-		color(display-p3 1 1 1 / 0.05) 166.51deg,
-		color(display-p3 0.91 0.824 0.369 / 0.12) 230.19deg,
-		color(display-p3 1 0.141 0.141 / 0.06) 294.23deg,
-		color(display-p3 0.659 0.435 0.788 / 0.1) 360deg
+		from 169.54deg at 43.19% 52.78%,
+		color(display-p3 0.118 0.055 0.133) 0deg,
+		color(display-p3 0.075 0.075 0.067) 84.81deg,
+		color(display-p3 0.09 0.094 0.071) 166.51deg,
+		color(display-p3 0.176 0.157 0.039) 230.19deg,
+		color(display-p3 0.125 0.004 0.024) 294.23deg,
+		color(display-p3 0.118 0.055 0.133) 360deg
 	);
+}
+
+@media (prefers-color-scheme: light) {
+	.metronome-tempo-background {
+		background: conic-gradient(
+			from 169.54deg at 43.19% 52.78%,
+			#bfd4a1 0deg,
+			#6a9bd3 84.81deg,
+			#1cf88e 166.51deg,
+			#dcee81 230.19deg,
+			#ea6c6c 294.23deg,
+			#bfd4a1 360deg
+		);
+		background: conic-gradient(
+			from 169.54deg at 43.19% 52.78%,
+			color(display-p3 0.749 0.831 0.631) 0deg,
+			color(display-p3 0.416 0.608 0.827) 84.81deg,
+			color(display-p3 0.114 0.973 0.557) 166.51deg,
+			color(display-p3 0.803 0.925 0.506) 230.19deg,
+			color(display-p3 0.918 0.424 0.424) 294.23deg,
+			color(display-p3 0.749 0.831 0.631) 360deg
+		);
+	}
 }
 
 .metronome.dragging {
