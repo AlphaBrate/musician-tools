@@ -7,8 +7,8 @@ Musician Tools (Beta ß 0.1.1) is a web-based application developed by AlphaBrat
 ## Features
 
 - **Metronome**: The most realistic and intuitive online metronome, delivering a smooth and fluent experience.
-- **Tuner**: (Coming soon)
-- **Pitcher**: (Coming soon)
+- **Tuner & Pitcher**: (Coming soon)
+- **Harmonizer**: (Coming soon)
 
 > As an early beta version (0.1.1), only the Metronome feature is currently available.
 
