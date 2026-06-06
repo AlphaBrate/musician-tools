@@ -6,19 +6,19 @@ let metronome = {
 };
 
 const tempoAdjustComponent = document.querySelector(
-	".metronome-body>.metronome-component.swing>.tempo-set"
+	".metronome-body>.metronome-component.swing>.tempo-set",
 );
 const timeSignatureAdjuster = {
 	image: document.querySelector(".metronome-body>.time-signature-adjuster"),
 	instance: document.querySelector(
-		".metronome-body>.time-signature-adjuster-instance"
+		".metronome-body>.time-signature-adjuster-instance",
 	),
 };
 const tempoSwingInstance = document.querySelector(
-	".metronome-body>.metronome-component.swing>.swing-instance"
+	".metronome-body>.metronome-component.swing>.swing-instance",
 );
 const swingComponent = document.querySelector(
-	".metronome-body>.metronome-component.swing"
+	".metronome-body>.metronome-component.swing",
 );
 const metronomeBody = document.querySelector(".metronome-body");
 const tempoDisplay = metronome.instance.querySelector(".tempo");
@@ -48,19 +48,19 @@ const positionStep = 2; // Step for time signature adjustment
 // Register custom sounds
 loadCustomSound(
 	"assets/metronome/audio/classic-click0.wav",
-	"strongBeat"
+	"strongBeat",
 ).catch(console.error);
 loadCustomSound(
 	"assets/metronome/audio/classic-click2.wav",
-	"normalBeat"
+	"normalBeat",
 ).catch(console.error);
 loadCustomSound(
 	"assets/metronome/audio/classic-tempo-adjust.wav",
-	"tempoAdjust"
+	"tempoAdjust",
 ).catch(console.error);
 loadCustomSound(
 	"assets/metronome/audio/classic-time-adjust.wav",
-	"timeAdjust"
+	"timeAdjust",
 ).catch(console.error);
 
 // Initialize tempo position
@@ -78,7 +78,7 @@ function initTempoPosition() {
 	const tempoSetPosition = tempoSetRect.top + window.scrollY;
 	metronome.instance.style.setProperty(
 		"--tempo-pixel-position",
-		`${tempoSetPosition}px`
+		`${tempoSetPosition}px`,
 	);
 	lastTempoPosition = tempoSetPosition;
 }
@@ -105,7 +105,7 @@ function initTimeSignaturePosition() {
 	const percent = index * positionStep;
 	metronome.instance.style.setProperty(
 		"--time-signature-position",
-		`${percent}%`
+		`${percent}%`,
 	);
 	updateBeatsDisplay(); // Initialize beats display
 }
@@ -131,44 +131,44 @@ function setTempoPosition(tempo) {
 	const tempoSetPosition = tempoSetRect.top + window.scrollY;
 	metronome.instance.style.setProperty(
 		"--tempo-pixel-position",
-		`${tempoSetPosition}px`
+		`${tempoSetPosition}px`,
 	);
 }
 
 // Event listeners for tempo drag (tempo-set)
 tempoAdjustComponent.addEventListener("mousedown", (e) =>
-	startDragging(e, "tempo")
+	startDragging(e, "tempo"),
 );
 tempoAdjustComponent.addEventListener(
 	"touchstart",
 	(e) => startDragging(e, "tempo"),
 	{
 		passive: false,
-	}
+	},
 );
 
 // Event listeners for precise tempo drag (.tempo)
 tempoDisplay.addEventListener("mousedown", (e) =>
-	startDragging(e, "precise-tempo")
+	startDragging(e, "precise-tempo"),
 );
 tempoDisplay.addEventListener(
 	"touchstart",
 	(e) => startDragging(e, "precise-tempo"),
 	{
 		passive: false,
-	}
+	},
 );
 
 // Event listeners for swing drag (swing-instance)
 tempoSwingInstance.addEventListener("mousedown", (e) =>
-	startDragging(e, "swing")
+	startDragging(e, "swing"),
 );
 tempoSwingInstance.addEventListener(
 	"touchstart",
 	(e) => startDragging(e, "swing"),
 	{
 		passive: false,
-	}
+	},
 );
 
 // Global drag event listeners
@@ -180,12 +180,12 @@ document.addEventListener("touchend", stopDragging);
 // Event listeners for time signature drag
 timeSignatureAdjuster.instance.addEventListener(
 	"mousedown",
-	startTimeSignatureDragging
+	startTimeSignatureDragging,
 );
 timeSignatureAdjuster.instance.addEventListener(
 	"touchstart",
 	startTimeSignatureDragging,
-	{ passive: false }
+	{ passive: false },
 );
 document.addEventListener("mousemove", dragTimeSignature);
 document.addEventListener("mouseup", stopTimeSignatureDragging);
@@ -261,7 +261,7 @@ function drag(e) {
 			const oldTempo = metronome.tempo;
 			metronome.tempo = Math.max(
 				40,
-				Math.min(208, metronome.tempo + deltaY)
+				Math.min(208, metronome.tempo + deltaY),
 			);
 
 			setTempo(metronome.tempo);
@@ -272,7 +272,7 @@ function drag(e) {
 			const tempoSetRect = tempoSetElement.getBoundingClientRect();
 			const currentTempoPosition = tempoSetRect.top + window.scrollY;
 			const positionDelta = Math.abs(
-				currentTempoPosition - lastTempoPosition
+				currentTempoPosition - lastTempoPosition,
 			);
 			const positionSpeed = positionDelta / deltaTime; // Calculate speed of dragging
 			lastTempoPosition = currentTempoPosition;
@@ -280,7 +280,7 @@ function drag(e) {
 			const blurRadius = Math.sqrt(positionSpeed) / 2; // Calculate blur radius
 			metronome.instance.style.setProperty(
 				"--blur-radius",
-				`${blurRadius}px`
+				`${blurRadius}px`,
 			);
 
 			clearTimeout(dragTimeout);
@@ -298,7 +298,7 @@ function drag(e) {
 				const normalizedSpeed = Math.min(
 					(positionSpeed - minPositionSpeed) /
 						(maxPositionSpeed - minPositionSpeed),
-					1
+					1,
 				);
 				const baseRate =
 					minPlaybackRate +
@@ -307,18 +307,18 @@ function drag(e) {
 				const randomVariation = (Math.random() - 0.5) * 0.2; // Add random variation
 				playbackRate = Math.max(
 					minPlaybackRate,
-					Math.min(maxPlaybackRate, baseRate + randomVariation)
+					Math.min(maxPlaybackRate, baseRate + randomVariation),
 				);
 			} // Check for crossed tempo thresholds
 
 			const tempoThresholds = Array.from(
 				{ length: Math.floor((208 - 40) / 6) + 1 },
-				(_, i) => 40 + i * 6
+				(_, i) => 40 + i * 6,
 			);
 			const crossedThreshold = tempoThresholds.find(
 				(threshold) =>
 					(oldTempo < threshold && metronome.tempo >= threshold) ||
-					(oldTempo > threshold && metronome.tempo <= threshold)
+					(oldTempo > threshold && metronome.tempo <= threshold),
 			);
 
 			if (crossedThreshold) {
@@ -336,18 +336,18 @@ function drag(e) {
 					(maxPercent - minPercent);
 			metronome.instance.style.setProperty(
 				"--tempo-position",
-				`${percent}%`
+				`${percent}%`,
 			);
 
 			const realPercentage = Math.min(
 				Math.max(((percent + 45) / 60) * 100, 0),
-				100
+				100,
 			);
 			const almostReachesTop = metronome.instance.querySelector(
-				".almost-reaches-top"
+				".almost-reaches-top",
 			);
 			const almostReachesBottom = metronome.instance.querySelector(
-				".almost-reaches-bottom"
+				".almost-reaches-bottom",
 			); // Show/hide visual cues for tempo limits
 
 			if (realPercentage <= 25) {
@@ -378,7 +378,7 @@ function drag(e) {
 			const tempoSetPosition = tempoSetRect.top + window.scrollY;
 			metronome.instance.style.setProperty(
 				"--tempo-pixel-position",
-				`${tempoSetPosition}px`
+				`${tempoSetPosition}px`,
 			);
 
 			const atMaxTempo = metronome.tempo === 208 && deltaY > 0; // Check if at max tempo
@@ -395,7 +395,7 @@ function drag(e) {
 				lastDragDirection = currentDragDirection;
 
 				metronome.instance.classList.add(
-					atMaxTempo ? "at-max" : "at-min"
+					atMaxTempo ? "at-max" : "at-min",
 				);
 
 				if (dragAttempts >= 20) {
@@ -407,7 +407,13 @@ function drag(e) {
 					metronome.instance.classList.remove("up", "down");
 					metronome.instance.classList.add("at-limit");
 
-					
+					// call out context menu
+					rightUI.style.top = "50%";
+					rightUI.style.left = "50%";
+
+                    rightUI.classList.add("active");
+
+                    contextMenuPreventGoOnce = true;
 
 					return;
 				}
@@ -453,7 +459,7 @@ function drag(e) {
 			const maxAngle = 30; // Maximum swing angle
 			const maxPixelDistance = Math.max(
 				swingRect.height * 0.5,
-				swingRect.width * 0.5
+				swingRect.width * 0.5,
 			);
 			const angle =
 				Math.atan2(-deltaXFromPivot, deltaYFromPivot) * (180 / Math.PI);
@@ -473,7 +479,7 @@ function drag(e) {
 						.slice(1)
 						.map(
 							(timestamp, index) =>
-								timestamp - lockSoundTimeStamps[index]
+								timestamp - lockSoundTimeStamps[index],
 						);
 					const averageTimeDiff =
 						timeDiffs.reduce((a, b) => a + b, 0) / timeDiffs.length;
@@ -481,7 +487,7 @@ function drag(e) {
 					metronome.tempo = newTempo;
 					metronome.instance.style.setProperty(
 						"--tempo",
-						`${newTempo}`
+						`${newTempo}`,
 					);
 					setTempo(newTempo);
 					tempoDisplay.textContent = newTempo; // Update display
@@ -555,7 +561,7 @@ function startMetronomeWithSwing() {
 		const swingDuration = 60 / metronome.tempo; // Calculate swing duration
 		metronome.instance.style.setProperty(
 			"--swing-duration",
-			`${swingDuration}s`
+			`${swingDuration}s`,
 		);
 
 		const swingRect = swingComponent.getBoundingClientRect();
@@ -572,12 +578,12 @@ function startMetronomeWithSwing() {
 		}
 
 		// console.log(clampedAngle);
-		
+
 		let transitionTime = 0;
-		 // Calculate transition time based on current angle
+		// Calculate transition time based on current angle
 
 		if (clampedAngle > 0) {
-			 transitionTime =
+			transitionTime =
 				(Math.abs(clampedAngle + 30) / maxAngle) * swingDuration; // Calculate transition time
 			swingComponent.style.transition = `transform ${
 				transitionTime / 2
@@ -585,8 +591,8 @@ function startMetronomeWithSwing() {
 
 			swingComponent.style.transform = `rotate(${-30}deg)`; // Rotate swing to start position
 		} else {
-			 transitionTime =
-				(Math.abs(clampedAngle -30) / maxAngle) * swingDuration; // Calculate transition time
+			transitionTime =
+				(Math.abs(clampedAngle - 30) / maxAngle) * swingDuration; // Calculate transition time
 			swingComponent.style.transition = `transform ${
 				transitionTime / 2
 			}s ease-in-out`; // Set transition
@@ -594,16 +600,20 @@ function startMetronomeWithSwing() {
 			swingComponent.style.transform = `rotate(${30}deg)`; // Rotate swing to start position
 		}
 
-		setTimeout(() => {
-			startMetronome({
-				bpm: metronome.tempo,
-				timeSignature: `${metronome.stress}/4`,
-			}); // Start metronome
-		}, transitionTime * 500 - swingDuration * 500); // Delay for metronome start
+		setTimeout(
+			() => {
+				startMetronome({
+					bpm: metronome.tempo,
+					timeSignature: `${metronome.stress}/4`,
+				}); // Start metronome
+			},
+			transitionTime * 500 - swingDuration * 500,
+		); // Delay for metronome start
 
 		setTimeout(() => {
 			metronome.instance.classList.add("swinging");
-			if (clampedAngle < 0) metronome.instance.classList.add("swinging-left"); // Add swinging class
+			if (clampedAngle < 0)
+				metronome.instance.classList.add("swinging-left"); // Add swinging class
 			swingComponent.style.transition = ""; // Reset transition
 		}, transitionTime * 500); // Delay for swing animation
 	}
@@ -709,17 +719,17 @@ function dragTimeSignature(e) {
 			const percent = newIndex * positionStep; // Calculate new position
 			metronome.instance.style.setProperty(
 				"--time-signature-position",
-				`${percent}%`
+				`${percent}%`,
 			);
 			updateBeatsDisplay(); // Update beats display
 			playSoundById("timeAdjust", 1.0); // Play sound on adjustment
 		}
 
 		const currentNumber = document.querySelector(
-			`#time-signature-${timeSignatureValues[currentIndex]}`
+			`#time-signature-${timeSignatureValues[currentIndex]}`,
 		);
 		const newNumber = document.querySelector(
-			`#time-signature-${timeSignatureValues[newIndex]}`
+			`#time-signature-${timeSignatureValues[newIndex]}`,
 		);
 		if (currentNumber) currentNumber.classList.remove("highlight"); // Remove highlight from current
 		if (newNumber) newNumber.classList.add("highlight"); // Highlight new
@@ -766,18 +776,20 @@ function handleKeyboard(e) {
 	const reverseVertical = preferences.keyboard.arrowKeys.reverse.vertical; // Check vertical reversal
 	const reverseHorizontal = preferences.keyboard.arrowKeys.reverse.horizontal; // Check horizontal reversal
 
+	if (document.activeElement.nodeName === "INPUT") return;
+
 	switch (e.key) {
 		case "ArrowUp":
 			metronome.tempo = Math.min(
 				208,
-				metronome.tempo + (reverseVertical ? -1 : 1)
+				metronome.tempo + (reverseVertical ? -1 : 1),
 			); // Adjust tempo up
 			updateTempo(); // Update tempo display
 			break;
 		case "ArrowDown":
 			metronome.tempo = Math.max(
 				40,
-				metronome.tempo + (reverseVertical ? 1 : -1)
+				metronome.tempo + (reverseVertical ? 1 : -1),
 			); // Adjust tempo down
 			updateTempo(); // Update tempo display
 			break;
@@ -799,13 +811,11 @@ function handleKeyboard(e) {
 }
 
 // Update tempo display and UI
-function updateTempo() {
-	setTempo(metronome.tempo);
-	tempoDisplay.textContent = `${metronome.tempo}`; // Update display
-	setTempoPosition(metronome.tempo); // Update tempo position
-	playSoundById("tempoAdjust", 1.0); // Play sound on adjustment
+function updateTempo(tempo = metronome.tempo) {
+	setTempo(tempo);
 	if (metronome.playing) {
 		stopMetronomeAndSwing(); // Stop metronome if playing
+		startMetronomeWithSwing(); // Restart metronome with swing
 	}
 }
 
@@ -821,15 +831,15 @@ function adjustTimeSignature(direction) {
 		const percent = newIndex * positionStep; // Calculate new position
 		metronome.instance.style.setProperty(
 			"--time-signature-position",
-			`${percent}%`
+			`${percent}%`,
 		);
 		updateBeatsDisplay(); // Update beats display
 		playSoundById("timeAdjust", 1.0); // Play sound on adjustment
 		const currentNumber = document.querySelector(
-			`#time-signature-${timeSignatureValues[currentIndex]}`
+			`#time-signature-${timeSignatureValues[currentIndex]}`,
 		);
 		const newNumber = document.querySelector(
-			`#time-signature-${timeSignatureValues[newIndex]}`
+			`#time-signature-${timeSignatureValues[newIndex]}`,
 		);
 		if (currentNumber) currentNumber.classList.remove("highlight"); // Remove highlight from current
 		if (newNumber) newNumber.classList.add("highlight"); // Highlight new
@@ -867,7 +877,8 @@ function tapTempo() {
 			const timeDiffs = lockSoundTimeStamps
 				.slice(1)
 				.map(
-					(timestamp, index) => timestamp - lockSoundTimeStamps[index]
+					(timestamp, index) =>
+						timestamp - lockSoundTimeStamps[index],
 				);
 			const averageTimeDiff =
 				timeDiffs.reduce((a, b) => a + b, 0) / timeDiffs.length; // Calculate average time difference
@@ -890,4 +901,5 @@ function setTempo(tempo) {
 	metronome.tempo = tempo;
 	tempoDisplay.textContent = metronome.tempo;
 	setTempoPosition(metronome.tempo);
+	document.getElementById("bpm-input").value = metronome.tempo; // Update BPM input field
 }

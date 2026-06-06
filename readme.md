@@ -2,13 +2,13 @@
 
 ## Overview
 
-Musician Tools (Beta ß 0.1.1) is a web-based application developed by AlphaBrate, currently in early development. It aims to provide musicians with a comprehensive suite of tools for seamless practice. We envision a realistic yet user-friendly interface designed for musicians of all skill levels.
+Musician Tools (V 1.0.0) is a web-based application developed by AlphaBrate, currently in early development. It aims to provide musicians with a comprehensive suite of tools for seamless practice. We envision a realistic yet user-friendly interface designed for musicians of all skill levels.
 
 ## Features
 
 - **Metronome**: The most realistic and intuitive online metronome, delivering a smooth and fluent experience.
-- **Tuner & Pitcher**: (Coming soon)
-- **Harmonizer**: (Coming soon)
+- **Tuner**: (Coming soon)
+- **Pitcher**: (Coming soon)
 
 > As an early beta version (0.1.1), only the Metronome feature is currently available.
 
