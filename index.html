@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Metronome - Musician Tools</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+
+<body>
+    <div class="context-menu flex flex-col absolute top-4 left-4 gap-4 z-10 apply-glass">
+        <div class="header text-sm font-bold text-center border-b pb-2">
+            <input type="text" id="bpm-input" value="120" class="text-xl">
+            <span class="ml-2">BPM</span>
+        </div>
+        <div class="flex flex-col items-left justify-center gap-4">
+            <span class="rightui-action flex-1 cursor-pointer flex flex-row items-left justify-start gap-4"
+                onclick="toggleMetronome()">
+                <i data-lucide="metronome" class="w-5 h-5"></i>
+                <span class="text-xs font-normal text-nowrap CLASS_DESCRIPTIVE_TEXT">
+                    Toggle
+                </span>
+            </span>
+            <span class="rightui-action flex-1 cursor-pointer flex flex-row items-left justify-start gap-4"
+                onclick="createTempoNode()">
+                <i data-lucide="copy-plus" class="w-5 h-5"></i>
+                <span class="text-xs font-normal text-nowrap CLASS_DESCRIPTIVE_TEXT">
+                    Add Tempo
+                </span>
+            </span>
+        </div>
+    </div>
+
+    <div class="tempo-nodes">
+    </div>
+
+    <div class="metronome">
+        <div class="beats"> </div>
+        <div class="metronome-panel">
+            <div class="ui">
+                <span class="up">》</span>
+                <span class="almost-reaches-top">
+                    <span class="text">Continue dragging</span>
+                    <span class="extreme">↑</span>
+                    <span class="done">✓</span>
+                    <br><span class="text"> to extend the tempo.</span>
+                </span>
+                <span class="tempo">120</span>
+                <span class="down">》</span>
+                <span class="almost-reaches-bottom">
+                    <span class="text">Continue dragging</span>
+                    <span class="extreme">↓</span>
+                    <span class="done">✓</span>
+                    <br><span class="text"> to extend the tempo.</span>
+                </span>
+            </div>
+        </div>
+        <div class="metronome-body">
+            <div class="time-signature-adjuster"></div>
+            <div class="time-signature-adjuster-instance"></div>
+            <div class="time-signature-adjuster-ruler">
+                <span class="lines"></span>
+            </div>
+            <div class="time-signature-adjuster-numbers">
+                <div class="numbers">
+                    <span class="number" id="time-signature-6">6</span>
+                    <span class="number highlight" id="time-signature-4">4</span>
+                    <span class="number" id="time-signature-3">3</span>
+                    <span class="number" id="time-signature-2">2</span>
+                    <span class="number" id="time-signature-0">0</span>
+                </div>
+            </div>
+            <div class="metronome-component fixed-metronome-body"></div>
+            <div class="metronome-component swing">
+                <span class="swing-instance"></span>
+                <div class="tempo-set apply-glass"></div>
+            </div>
+            <div class="metronome-component cover"></div>
+        </div>
+        <div class="metronome-tempo-background"></div>
+    </div>
+    <div class="hud">
+        <div><button class="safari-button">Enable Sound</button></a><a href="/"><button
+                    class="safari-button">Reload</button></a></div>
+        <h1 class="opacity-60" id="hudLine">&copy; <a href="https://aphbrt.web.app/">AlphaBrate</a> 2025-2026. By <a
+                href="https://github.com/ChuTM/">Ming Chu</a>.</h1>
+        <p class="opacity-60">V 1.0.0 Stable. APEL applies. <a href="https://github.com/AlphaBrate/Musician-Tools">View
+                on GitHub</a>.</p>
+    </div>
+    <script src="./js/script.js"></script>
+    <script src="./js/metronome-core.js"></script>
+    <script src="./js/metronome.js"></script>
+
+    <!-- SVG Filters -->
+    <svg color-interpolation-filters="sRGB" style="display:none">
+        <defs>
+            <filter id="thumb-filter" listento=".tempo-set">
+                <feGaussianBlur in="SourceGraphic" stdDeviation="0.2" result="blurred_source"></feGaussianBlur>
+                <feImage href="./assets/effects/glass-displacement-1053x1485.png" x="0" y="0" width="300" height="430"
+                    result="displacement_map"></feImage>
+                <feDisplacementMap in="blurred_source" in2="displacement_map" scale="22.26064761799501"
+                    xChannelSelector="R" yChannelSelector="G" result="displaced"></feDisplacementMap>
+                <feColorMatrix in="displaced" type="saturate" result="displaced_saturated" values="6"></feColorMatrix>
+                <feImage href="./assets/effects/glass-specular-1053x1485.png" x="0" y="0" width="300" height="430"
+                    result="specular_layer"></feImage>
+                <feComposite in="displaced_saturated" in2="specular_layer" operator="in" result="specular_saturated">
+                </feComposite>
+                <feComponentTransfer in="specular_layer" result="specular_faded">
+                    <feFuncA type="linear" slope="0.5"></feFuncA>
+                </feComponentTransfer>
+                <feBlend in="specular_saturated" in2="displaced" mode="normal" result="withSaturation"></feBlend>
+                <feBlend in="specular_faded" in2="withSaturation" mode="normal"></feBlend>
+            </filter>
+        </defs>
+    </svg>
+    <svg color-interpolation-filters="sRGB" style="display:none">
+        <defs>
+            <filter id="rightui-filter" listento=".context-menu">
+                <feGaussianBlur in="SourceGraphic" stdDeviation="0.2" result="blurred_source"></feGaussianBlur>
+                <feImage href="./assets/effects/extreme-displacement-1080x1128.png" x="0" y="0" width="300" height="430"
+                    result="displacement_map"></feImage>
+                <feDisplacementMap in="blurred_source" in2="displacement_map" scale="22.26064761799501"
+                    xChannelSelector="R" yChannelSelector="G" result="displaced"></feDisplacementMap>
+                <feColorMatrix in="displaced" type="saturate" result="displaced_saturated" values="6"></feColorMatrix>
+                <feImage href="./assets/effects/extreme-specular-1080x1128.png" x="0" y="0" width="300" height="430"
+                    result="specular_layer"></feImage>
+                <feComposite in="displaced_saturated" in2="specular_layer" operator="in" result="specular_saturated">
+                </feComposite>
+                <feComponentTransfer in="specular_layer" result="specular_faded">
+                    <feFuncA type="linear" slope="0.5"></feFuncA>
+                </feComponentTransfer>
+                <feBlend in="specular_saturated" in2="displaced" mode="normal" result="withSaturation"></feBlend>
+                <feBlend in="specular_faded" in2="withSaturation" mode="normal"></feBlend>
+            </filter>
+        </defs>
+    </svg>
+    <svg color-interpolation-filters="sRGB" style="display:none">
+        <defs>
+            <filter id="circle-filter">
+                <feGaussianBlur in="SourceGraphic" stdDeviation="0.2" result="blurred_source"></feGaussianBlur>
+                <feImage href="./assets/effects/extreme-displacement-1100x1100.png" x="0" y="0" width="50" height="50"
+                    result="displacement_map"></feImage>
+                <feDisplacementMap in="blurred_source" in2="displacement_map" scale="22.26064761799501"
+                    xChannelSelector="R" yChannelSelector="G" result="displaced"></feDisplacementMap>
+                <feColorMatrix in="displaced" type="saturate" result="displaced_saturated" values="6"></feColorMatrix>
+                <feImage href="./assets/effects/extreme-specular-1100x1100.png" x="0" y="0" width="50" height="50"
+                    result="specular_layer"></feImage>
+                <feComposite in="displaced_saturated" in2="specular_layer" operator="in" result="specular_saturated">
+                </feComposite>
+                <feComponentTransfer in="specular_layer" result="specular_faded">
+                    <feFuncA type="linear" slope="0.5"></feFuncA>
+                </feComponentTransfer>
+                <feBlend in="specular_saturated" in2="displaced" mode="normal" result="withSaturation"></feBlend>
+                <feBlend in="specular_faded" in2="withSaturation" mode="normal"></feBlend>
+            </filter>
+        </defs>
+    </svg>
+</body>
+
+</html>

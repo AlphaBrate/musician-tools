@@ -1,0 +1,1382 @@
+:root {
+	/* Enable light-dark() support */
+	color-scheme: light dark;
+
+	/* Base Core Colors */
+	--color-bg: light-dark(#f0f4f7, #18181b);
+	--color-bg-alt: light-dark(#f5f7fa, #232336);
+	--color-text: light-dark(#222222, #f3f4f6);
+	--color-primary: light-dark(#2563eb, #60a5fa);
+	--color-secondary: light-dark(#64748b, #94a3b8);
+	--color-border: light-dark(#e5e7eb, #2d2d3a);
+	--color-accent: light-dark(#f59e42, #fbbf24);
+	--color-extreme: light-dark(#000000, #ffffff);
+	--color-success: #008000;
+
+	/* UI Surfaces & Overlays */
+	--color-ui-bg: light-dark(rgba(0, 0, 0, 0.05), rgba(255, 255, 255, 0.08));
+	--color-ui-border: light-dark(
+		rgba(0, 0, 0, 0.05),
+		rgba(255, 255, 255, 0.05)
+	);
+	--color-ui-hover: light-dark(
+		rgba(0, 0, 0, 0.08),
+		rgba(255, 255, 255, 0.15)
+	);
+	--color-ui-active: light-dark(
+		rgba(0, 0, 0, 0.03),
+		rgba(255, 255, 255, 0.05)
+	);
+	--color-ui-focus: light-dark(rgba(0, 0, 0, 0.15), rgba(255, 255, 255, 0.2));
+	--color-shadow: light-dark(rgba(0, 0, 0, 0.1), rgba(255, 255, 255, 0.5));
+
+	/* Buttons (Mute, Reset, Tap) */
+	--color-btn-mute: light-dark(
+		rgba(220, 38, 38, 0.15),
+		rgba(255, 100, 100, 0.15)
+	);
+	--color-btn-mute-border: light-dark(
+		rgba(220, 38, 38, 0.3),
+		rgba(255, 100, 100, 0.3)
+	);
+	--color-btn-reset: light-dark(
+		rgba(2, 132, 199, 0.15),
+		rgba(100, 200, 255, 0.15)
+	);
+	--color-btn-reset-border: light-dark(
+		rgba(2, 132, 199, 0.3),
+		rgba(100, 200, 255, 0.3)
+	);
+	--color-btn-tap: light-dark(
+		rgba(22, 163, 74, 0.15),
+		rgba(100, 255, 150, 0.15)
+	);
+	--color-btn-tap-border: light-dark(
+		rgba(22, 163, 74, 0.3),
+		rgba(100, 255, 150, 0.3)
+	);
+
+	/* Beats Visualization */
+	--color-beat-border: light-dark(#00000097, #ffffff7b);
+	--color-beat-stress: light-dark(#0000008e, #ffffffbd);
+	--color-beat-light: light-dark(#000000, #ffffff);
+	--color-beat-stress-light: light-dark(#000000, #ffff00);
+	--color-beat-glow: #ffff00;
+
+	/* Specific Elements */
+	--color-ruler-line: light-dark(
+		rgba(0, 0, 0, 0.2),
+		rgba(139, 164, 187, 0.4)
+	);
+	--color-highlight-bg: #00bfff;
+	--color-highlight-text: #000000;
+	--color-tempo-thumb: #ffffff;
+	--color-tempo-thumb-active: rgba(255, 255, 255, 0.5);
+
+	/* Text Gradients */
+	--color-panel-gradient: light-dark(
+		linear-gradient(
+			90deg,
+			rgba(21, 75, 129, 0.46) 3.06%,
+			rgba(255, 107, 107, 0.3) 102.5%
+		),
+		linear-gradient(
+			90deg,
+			rgba(0, 235, 255, 0.19) 3.06%,
+			rgba(255, 255, 255, 0.3) 102.5%
+		)
+	);
+
+	/* Dynamic Conic Background */
+	--color-conic-bg: light-dark(
+		conic-gradient(
+			from 169.54deg at 43.19% 52.78%,
+			#bfd4a1 0deg,
+			#6a9bd3 84.81deg,
+			#1cf88e 166.51deg,
+			#dcee81 230.19deg,
+			#ea6c6c 294.23deg,
+			#bfd4a1 360deg
+		),
+		conic-gradient(
+			from 169.54deg at 43.19% 52.78%,
+			#210d23 0deg,
+			#131311 84.81deg,
+			#171811 166.51deg,
+			#2e2804 230.19deg,
+			#240006 294.23deg,
+			#210d23 360deg
+		)
+	);
+	--color-conic-p3: light-dark(
+		conic-gradient(
+			from 169.54deg at 43.19% 52.78%,
+			color(display-p3 0.749 0.831 0.631) 0deg,
+			color(display-p3 0.416 0.608 0.827) 84.81deg,
+			color(display-p3 0.114 0.973 0.557) 166.51deg,
+			color(display-p3 0.803 0.925 0.506) 230.19deg,
+			color(display-p3 0.918 0.424 0.424) 294.23deg,
+			color(display-p3 0.749 0.831 0.631) 360deg
+		),
+		conic-gradient(
+			from 169.54deg at 43.19% 52.78%,
+			color(display-p3 0.118 0.055 0.133) 0deg,
+			color(display-p3 0.075 0.075 0.067) 84.81deg,
+			color(display-p3 0.09 0.094 0.071) 166.51deg,
+			color(display-p3 0.176 0.157 0.039) 230.19deg,
+			color(display-p3 0.125 0.004 0.024) 294.23deg,
+			color(display-p3 0.118 0.055 0.133) 360deg
+		)
+	);
+}
+
+a {
+	color: var(--color-text);
+}
+
+.nowrap {
+	white-space: nowrap;
+}
+
+.extreme {
+	color: var(--color-extreme);
+	font-weight: 700;
+	text-shadow: 0 0 10px var(--color-shadow);
+	opacity: 1;
+	position: absolute;
+	font-size: 2rem;
+}
+
+.done {
+	opacity: 0;
+	color: var(--color-success);
+	font-weight: 700;
+	font-size: 2rem;
+}
+
+body {
+	overflow: hidden;
+	background-color: var(--color-bg);
+	color: var(--color-text);
+	font-family:
+		system-ui,
+		-apple-system,
+		BlinkMacSystemFont,
+		"Segoe UI",
+		Roboto,
+		Oxygen,
+		Ubuntu,
+		Cantarell,
+		"Open Sans",
+		"Helvetica Neue",
+		sans-serif;
+}
+
+.metronome {
+	--swing-duration: 1s;
+	--tempo-position: -10%;
+	--time-signature-position: 0%;
+	--tempo-pixel-position: 0px;
+	--blur-radius: 0px;
+	user-select: none;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	position: absolute;
+	margin: 0;
+	padding: 0;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.metronome-panel {
+	position: absolute;
+	top: 50%;
+	left: calc(65% + var(--tempo-pixel-position) / 5);
+	transform: translate(-50%, -50%);
+	height: 100%;
+	width: 30%;
+}
+
+.metronome-panel .ui > span.tempo {
+	position: absolute;
+	font-family: "Helvetica Neue";
+	font-style: normal;
+	font-weight: 700;
+	font-size: 5rem;
+	background: linear-gradient(
+		90deg,
+		rgba(0, 235, 255, 0.19) 3.06%,
+		rgba(255, 255, 255, 0.3) 102.5%
+	);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	background-clip: text;
+	text-fill-color: transparent;
+	top: calc(var(--tempo-pixel-position) - 25pt);
+	left: 0;
+	filter: blur(calc(var(--blur-radius) / 4));
+	transition: transform 0.5s ease-in-out;
+}
+
+.metronome-panel .ui > span.tempo::before {
+	content: "";
+	position: absolute;
+	top: 50%;
+	right: 55%;
+	transform: translateX(-50%);
+	height: 1px;
+	width: 0%;
+	background: var(--color-ruler-line);
+	display: flex;
+	box-shadow: 0 0 var(--color-extreme);
+	opacity: 0;
+	transition: 0.5s ease-in-out;
+}
+
+.metronome-panel .ui > span.tempo::after {
+	content: "BPM";
+	font-size: 1.5rem;
+	font-weight: 500;
+	margin-left: 0.5rem;
+}
+
+.metronome-panel .ui > span.up {
+	font-family: "Helvetica Neue";
+	font-style: normal;
+	font-weight: 700;
+	font-size: 5rem;
+	background: var(--color-panel-gradient);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	background-clip: text;
+	text-fill-color: transparent;
+	position: absolute;
+	top: calc(var(--tempo-pixel-position) - 90pt);
+	left: 2pt;
+	transform: rotate(-90deg);
+	opacity: calc(var(--blur-radius) / 50px);
+	visibility: hidden;
+}
+
+.metronome-panel .ui > span.down {
+	font-family: "Helvetica Neue";
+	font-style: normal;
+	font-weight: 700;
+	font-size: 5rem;
+	background: var(--color-panel-gradient);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	background-clip: text;
+	text-fill-color: transparent;
+	position: absolute;
+	top: calc(var(--tempo-pixel-position) + 30pt);
+	left: 2pt;
+	transform: rotate(90deg);
+	opacity: calc(var(--blur-radius) / 50px);
+	visibility: hidden;
+	transition: opacity 0s ease-in-out;
+}
+
+.metronome-panel .ui > span.almost-reaches-top {
+	font-family: "Helvetica Neue";
+	font-style: normal;
+	font-weight: 500;
+	font-size: 16pt;
+	color: var(--color-secondary);
+	position: absolute;
+	top: calc(var(--tempo-pixel-position) + 40pt);
+	left: 2pt;
+	opacity: 0;
+}
+
+.metronome-panel .ui > span.almost-reaches-bottom {
+	font-family: "Helvetica Neue";
+	font-style: normal;
+	font-weight: 500;
+	font-size: 16pt;
+	color: var(--color-secondary);
+	position: absolute;
+	top: calc(var(--tempo-pixel-position) - 70pt);
+	left: 2pt;
+	opacity: 0;
+}
+
+.metronome.up .metronome-panel .ui > span.up {
+	visibility: visible;
+}
+
+.metronome.down .metronome-panel .ui > span.down {
+	visibility: visible;
+}
+
+.metronome.at-min .metronome-panel .ui > span.up {
+	visibility: visible;
+	opacity: 1 !important;
+	transition: opacity 0.5s ease-in-out;
+}
+
+.metronome.at-limit .metronome-panel .ui > span.almost-reaches-bottom,
+.metronome.at-limit .metronome-panel .ui > span.almost-reaches-top {
+	.extreme {
+		opacity: 0;
+	}
+
+	.done {
+		opacity: 1;
+	}
+}
+
+.metronome.at-max .metronome-panel .ui > span.down {
+	visibility: visible;
+	opacity: 1 !important;
+	transition: opacity 0.5s ease-in-out;
+}
+
+.metronome-body {
+	transition:
+		transform 0.5s ease-in-out,
+		background 0.5s ease-in-out;
+	position: absolute;
+	width: min(40vw, calc(70vh * 0.7));
+	height: min(calc(40vw / 0.7), 70vh);
+}
+
+.metronome-body .metronome-component {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-repeat: no-repeat;
+	background-size: contain;
+	background-position: center;
+}
+
+.metronome-body .time-signature-adjuster {
+	position: absolute;
+	left: calc(20% + var(--time-signature-position));
+	bottom: 25%;
+	height: 5%;
+	width: 80%;
+	background-repeat: no-repeat;
+	background-size: contain;
+	background-position: center;
+	background-image: url("../assets/metronome/time-signature-adjuster.svg");
+	transition: left 0.1s ease-in-out;
+}
+
+.metronome-body
+	.time-signature-adjuster-instance:hover
+	~ .time-signature-adjuster-ruler,
+.metronome-body
+	.time-signature-adjuster-instance:hover
+	~ .time-signature-adjuster-numbers,
+.metronome-body
+	.time-signature-adjuster-instance.show
+	~ .time-signature-adjuster-ruler,
+.metronome-body
+	.time-signature-adjuster-instance.show
+	~ .time-signature-adjuster-numbers {
+	transform: translateX(40%) translateY(-2pt);
+	transition: 0.3s ease-in-out;
+	opacity: 0.5;
+}
+
+.metronome-body
+	.time-signature-adjuster-instance:active
+	~ .time-signature-adjuster-ruler,
+.metronome-body
+	.time-signature-adjuster-instance:active
+	~ .time-signature-adjuster-numbers {
+	transform: translateX(40%) translateY(0pt);
+	opacity: 1;
+}
+
+.metronome-body
+	.time-signature-adjuster-instance:active
+	~ .time-signature-adjuster-numbers {
+	transform: translateX(40%) translateY(3pt);
+}
+
+.metronome-body .time-signature-adjuster-ruler,
+.metronome-body .time-signature-adjuster-numbers {
+	opacity: 0;
+	position: absolute;
+	right: 0;
+	transform: translateX(40%) translateY(-5%);
+	bottom: 5%;
+	height: 20%;
+	width: 60%;
+	transition:
+		opacity 0.7s ease-in-out,
+		transform 1s ease-in-out;
+	overflow: visible;
+	z-index: 11;
+}
+
+.metronome-body .time-signature-adjuster-ruler {
+	mask: linear-gradient(
+		90deg,
+		rgba(255, 255, 255, 0) 42%,
+		var(--color-extreme) 50%,
+		rgba(255, 255, 255, 0) 85%
+	);
+}
+
+.metronome-body .time-signature-adjuster-numbers {
+	mask: linear-gradient(
+		90deg,
+		rgba(255, 255, 255, 0) 45%,
+		var(--color-extreme) 60%,
+		var(--color-extreme) 75%,
+		rgba(255, 255, 255, 0) 85%
+	);
+}
+
+.metronome-body .time-signature-adjuster-ruler .lines {
+	position: absolute;
+	right: calc(-2 * var(--time-signature-position));
+	transform: translateX(-3%);
+	height: 25%;
+	width: 100%;
+	background-repeat: no-repeat;
+	background-size: contain;
+	background-image: url("../assets/metronome/ruler.svg");
+	transition: right 0.1s ease-in-out;
+}
+
+.metronome-body .time-signature-adjuster-numbers .numbers {
+	position: absolute;
+	top: 25%;
+	left: calc(var(--time-signature-position) * 9 - 2.1rem);
+	height: 20%;
+	width: 100%;
+	display: flex;
+	padding: 0 5%;
+	font-family: "Helvetica Neue";
+	font-style: normal;
+	font-weight: 500;
+	font-size: 10pt;
+	color: var(--color-secondary);
+	pointer-events: none;
+	transition: 0.1s ease;
+
+	.number {
+		margin-right: 1rem;
+		font-size: 16px;
+		height: 20px;
+		width: 20px;
+		border-radius: 50%;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		transition:
+			background 0.3s ease,
+			color 0.3s ease;
+	}
+
+	.highlight {
+		background: var(--color-highlight-bg);
+		color: var(--color-highlight-text);
+	}
+}
+
+.metronome-body .time-signature-adjuster-instance {
+	z-index: 9;
+	position: absolute;
+	right: -10%;
+	bottom: 25%;
+	height: 5%;
+	width: 35%;
+	background-repeat: no-repeat;
+	background-size: contain;
+	background-position: center;
+	cursor: grab;
+}
+
+.metronome-body .fixed-metronome-body {
+	background-image: url("../assets/metronome/fixed-metronome-body.svg");
+}
+
+.metronome-body .swing {
+	transform-origin: 50% 100%;
+	background-image: url("../assets/metronome/swing.svg");
+}
+
+.metronome.swinging .swing {
+	animation: swing var(--swing-duration) ease-in-out infinite alternate;
+}
+
+.metronome.swinging-left .swing {
+	animation: swing var(--swing-duration) ease-in-out infinite
+		alternate-reverse;
+}
+
+@keyframes swing {
+	0% {
+		transform: rotate(-30deg);
+	}
+	100% {
+		transform: rotate(30deg);
+	}
+}
+
+.metronome-body .swing .tempo-set {
+	position: absolute;
+	top: calc(50% + var(--tempo-position));
+	left: 50%;
+	transform: translate(-50%, -50%);
+	height: 8%;
+	width: 8%;
+	cursor: grab;
+	background-repeat: no-repeat;
+	background-size: contain;
+	background-position: center;
+	transition:
+		transform 0.1s ease-in-out,
+		background 0.3s ease-in-out;
+	background: var(--color-tempo-thumb);
+	border-radius: 5px;
+}
+
+.metronome-body .swing .tempo-set:hover {
+	transform: translate(-50%, -50%) scale(0.98);
+}
+
+.metronome-body .swing .tempo-set:active {
+	background: var(--color-tempo-thumb-active);
+}
+
+.metronome-body .swing .tempo-set.apply-glass:active {
+	backdrop-filter: url("#thumb-filter");
+}
+
+.metronome-body .swing .swing-instance {
+	position: absolute;
+	top: 0;
+	left: 50%;
+	transform: translateX(-50%);
+	height: 70%;
+	width: 10%;
+	cursor: grab;
+	background-repeat: no-repeat;
+	background-size: contain;
+	background-position: center;
+}
+
+.metronome-body .cover {
+	background-image: url("../assets/metronome/cover.svg");
+	pointer-events: none;
+}
+
+.metronome-tempo-background {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	z-index: -1;
+	opacity: 0;
+	transition: opacity 0.5s ease-in-out;
+	background: var(--color-conic-bg);
+	background: var(--color-conic-p3);
+}
+
+.metronome.dragging {
+	.metronome-body {
+		transform: translateX(-20%);
+	}
+	.metronome-body > .swing > .tempo-set,
+	.metronome-body > .swing > .swing-instance {
+		filter: drop-shadow(0 0 5px var(--color-shadow));
+		-webkit-filter: drop-shadow(0 0 5px var(--color-shadow));
+	}
+	.metronome-tempo-background {
+		opacity: 0.6;
+		transition: 2s;
+	}
+	.metronome-panel .ui > .tempo {
+		opacity: 1;
+	}
+	.metronome-panel .ui > .tempo::before {
+		opacity: 1;
+		width: 100%;
+	}
+	.metronome-panel .ui > span.almost-reaches-top {
+		opacity: 1;
+	}
+}
+
+.metronome:not(.dragging) {
+	.metronome-panel .ui > span.almost-reaches-top,
+	.metronome-panel .ui > span.almost-reaches-bottom,
+	.metronome-panel .ui > span.down,
+	.metronome-panel .ui > span.up {
+		opacity: 0 !important;
+	}
+	.metronome-panel .ui > .tempo {
+		transform: translateX(40pt);
+	}
+}
+
+.metronome.swinging .metronome-body .swing .tempo-set {
+	pointer-events: none;
+}
+
+.metronome.swinging .metronome-body .swing .swing-instance {
+	width: 50%;
+}
+
+.metronome.precise-dragging .almost-reaches-top,
+.metronome.precise-dragging .almost-reaches-bottom {
+	opacity: 0 !important;
+}
+
+svg.lucide {
+	stroke-width: 1.75;
+	transition: stroke-width 0.2s ease;
+}
+
+#bpm-input {
+	background: transparent;
+	border: none;
+	border-bottom: 1px solid var(--color-ui-focus);
+	color: var(--color-extreme);
+	font-weight: 600;
+	text-align: center;
+	transition: all 0.3s ease;
+	width: 40px;
+	outline: none;
+}
+
+.context-menu {
+	background: var(--color-ui-bg);
+	border-radius: 12px;
+	padding: 12px;
+	color: var(--color-extreme);
+	font-size: 16px;
+	font-weight: 500;
+	opacity: 0;
+	pointer-events: none;
+	transition: opacity 0.1s ease;
+	backdrop-filter: blur(3px) saturate(50%) brightness(90%);
+	border: 1px solid var(--color-ui-border);
+	user-select: none;
+
+	&.active.apply-glass {
+		backdrop-filter: url(#rightui-filter) blur(1px) brightness(90%);
+		border: none;
+	}
+}
+
+.context-menu > .header {
+	border-color: var(--color-ui-border);
+}
+
+.context-menu.active {
+	opacity: 1;
+	pointer-events: auto;
+}
+
+.tools {
+	display: flex;
+	gap: 12px;
+	flex-wrap: wrap;
+}
+
+.tools button {
+	background: var(--color-ui-bg);
+	border: 1px solid var(--color-ui-border);
+	border-radius: 12px;
+	padding: 12px;
+	color: var(--color-extreme);
+	font-size: 0;
+	font-weight: 500;
+	backdrop-filter: blur(5px);
+	cursor: pointer;
+	transition: all 0.3s ease;
+	flex: 1;
+	width: 36px;
+	height: 36px;
+	position: relative;
+	overflow: hidden;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.tools button img {
+	width: 24px;
+	height: 24px;
+}
+
+.tools button::before {
+	content: "";
+	position: absolute;
+	top: 0;
+	left: -100%;
+	width: 100%;
+	height: 100%;
+	background: linear-gradient(
+		90deg,
+		transparent,
+		var(--color-ui-border),
+		transparent
+	);
+	transition: left 0.5s ease;
+}
+
+.tools button:hover::before {
+	left: 100%;
+}
+
+.tools button:hover {
+	background: var(--color-ui-hover);
+	border-color: var(--color-ui-focus);
+	transform: translateY(-2px);
+	box-shadow:
+		0 4px 16px rgba(0, 0, 0, 0.2),
+		inset 0 1px 0 var(--color-ui-border);
+}
+
+.tools button:active {
+	transform: translateY(0);
+	background: var(--color-ui-active);
+	box-shadow:
+		inset 0 2px 4px rgba(0, 0, 0, 0.2),
+		0 1px 4px rgba(0, 0, 0, 0.1);
+}
+
+.tools button:focus {
+	outline: none;
+	box-shadow:
+		0 0 0 3px var(--color-ui-focus),
+		inset 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+#mute-button {
+	background: var(--color-btn-mute);
+	border-color: var(--color-btn-mute-border);
+}
+
+#mute-button img {
+	content: url("../assets/metronome/mute.svg");
+}
+
+#mute-button.muted img {
+	content: url("../assets/metronome/unmute.svg");
+}
+
+#reset-button {
+	background: var(--color-btn-reset);
+	border-color: var(--color-btn-reset-border);
+}
+
+#reset-button img {
+	content: url("../assets/metronome/reset.svg");
+}
+
+#tap-tempo-button {
+	background: var(--color-btn-tap);
+	border-color: var(--color-btn-tap-border);
+}
+
+#tap-tempo-button img {
+	content: url("../assets/metronome/gesture.svg");
+}
+
+@keyframes fadeIn {
+	from {
+		opacity: 0;
+		transform: translateY(20px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+.flex {
+	display: flex;
+}
+
+.column {
+	flex-direction: column;
+}
+
+.hud {
+	position: absolute;
+	inset: auto 16px 16px auto;
+	z-index: 1;
+	text-align: right;
+	font-variant-numeric: tabular-nums;
+	user-select: none;
+}
+
+.hud h1 {
+	margin: 0;
+	font-size: 12px;
+	font-weight: 500;
+}
+
+.hud p {
+	margin: 2px 0 0 0;
+	font-size: 8px;
+	opacity: 0.8;
+}
+
+.beats {
+	position: absolute;
+	bottom: 20pt;
+	left: 50%;
+	transform: translateX(-50%);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 7px;
+	z-index: 10;
+}
+
+.beat {
+	display: inline-block;
+	width: 5px;
+	height: 5px;
+	margin: 0;
+	border: 1px solid var(--color-beat-border);
+	border-radius: 50%;
+	animation: shimmer 2s infinite linear;
+}
+
+.stress {
+	background-color: var(--color-beat-stress);
+}
+
+.light-up {
+	background-color: var(--color-beat-light);
+	box-shadow: light-dark(
+		none,
+		0 0 10px var(--color-beat-light),
+		0 0 20px var(--color-beat-glow)
+	);
+}
+
+.stress.light-up {
+	background-color: var(--color-beat-stress-light);
+	box-shadow: light-dark(
+		none,
+		0 0 10px var(--color-beat-glow),
+		0 0 20px var(--color-beat-glow)
+	);
+}
+
+@keyframes shimmer {
+	0% {
+		opacity: 0.7;
+		transform: scale(1);
+	}
+	50% {
+		opacity: 1;
+		transform: scale(1.1);
+	}
+	100% {
+		opacity: 0.7;
+		transform: scale(1);
+	}
+}
+
+/* Mobile-specific styles */
+@media (max-width: 768px) {
+	span.text {
+		display: none;
+	}
+
+	body {
+		margin: 0;
+		padding: 0;
+		width: 100vw;
+		overflow: hidden;
+	}
+
+	.metronome {
+		flex-direction: column;
+		height: 100vh;
+		width: 100vw;
+		padding: 0;
+		margin: 0;
+		overflow: hidden;
+	}
+
+	.metronome-body {
+		width: 90vw;
+		height: 60vh;
+		position: relative;
+		margin: 0 auto;
+		transform: translateX(-7%);
+	}
+
+	.metronome-panel {
+		position: absolute;
+		top: 50%;
+		left: calc(65% + var(--tempo-pixel-position) / 5);
+		transform: translate(-50%, -50%);
+		height: 100%;
+		width: 30%;
+	}
+
+	.metronome-panel .ui > span.tempo {
+		position: absolute;
+		font-family: "Helvetica Neue";
+		font-style: normal;
+		font-weight: 700;
+		font-size: 5rem;
+		background: var(--color-panel-gradient);
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+		background-clip: text;
+		text-fill-color: transparent;
+		top: calc(var(--tempo-pixel-position) - 25pt);
+		left: 0;
+		filter: blur(calc(var(--blur-radius) / 4));
+		transition: transform 0.5s ease-in-out;
+	}
+
+	.metronome-panel .ui > span.tempo::before {
+		content: "";
+		position: absolute;
+		top: 50%;
+		right: 55%;
+		transform: translateX(-50%);
+		height: 1px;
+		width: 0%;
+		background: var(--color-ruler-line);
+		display: flex;
+		box-shadow: 0 0 var(--color-extreme);
+		opacity: 0;
+		transition: 0.5s ease-in-out;
+	}
+
+	.metronome-panel .ui > span.tempo::after {
+		content: "";
+		font-size: 1.5rem;
+		font-weight: 500;
+		margin-left: 0.5rem;
+	}
+
+	.metronome-panel .ui > span.up {
+		font-family: "Helvetica Neue";
+		font-style: normal;
+		font-weight: 700;
+		font-size: 5rem;
+		background: var(--color-panel-gradient);
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+		background-clip: text;
+		text-fill-color: transparent;
+		position: absolute;
+		top: calc(var(--tempo-pixel-position) - 90pt);
+		left: 2pt;
+		transform: rotate(-90deg);
+		opacity: calc(var(--blur-radius) / 50px);
+		visibility: hidden;
+	}
+
+	.metronome-panel .ui > span.down {
+		font-family: "Helvetica Neue";
+		font-style: normal;
+		font-weight: 700;
+		font-size: 5rem;
+		background: var(--color-panel-gradient);
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+		background-clip: text;
+		text-fill-color: transparent;
+		position: absolute;
+		top: calc(var(--tempo-pixel-position) + 30pt);
+		left: 2pt;
+		transform: rotate(90deg);
+		opacity: calc(var(--blur-radius) / 50px);
+		visibility: hidden;
+		transition: opacity 0s ease-in-out;
+	}
+
+	.metronome-panel .ui > span.almost-reaches-top {
+		font-family: "Helvetica Neue";
+		font-style: normal;
+		font-weight: 500;
+		font-size: 16pt;
+		color: var(--color-secondary);
+		position: absolute;
+		top: calc(var(--tempo-pixel-position) + 40pt);
+		left: 2pt;
+		opacity: 0;
+	}
+
+	.metronome-panel .ui > span.almost-reaches-bottom {
+		font-family: "Helvetica Neue";
+		font-style: normal;
+		font-weight: 500;
+		font-size: 16pt;
+		color: var(--color-secondary);
+		position: absolute;
+		top: calc(var(--tempo-pixel-position) - 70pt);
+		left: 2pt;
+		opacity: 0;
+	}
+
+	.metronome.up .metronome-panel .ui > span.up {
+		visibility: visible;
+	}
+
+	.metronome.down .metronome-panel .ui > span.down {
+		visibility: visible;
+	}
+
+	.metronome.at-min .metronome-panel .ui > span.up {
+		visibility: visible;
+		opacity: 1 !important;
+		transition: opacity 0.5s ease-in-out;
+	}
+
+	.metronome.at-limit .metronome-panel .ui > span.almost-reaches-bottom,
+	.metronome.at-limit .metronome-panel .ui > span.almost-reaches-top {
+		.extreme {
+			opacity: 0;
+		}
+
+		.done {
+			opacity: 1;
+		}
+	}
+
+	.metronome.at-max .metronome-panel .ui > span.down {
+		visibility: visible;
+		opacity: 1 !important;
+		transition: opacity 0.5s ease-in-out;
+	}
+
+	.metronome-body .time-signature-adjuster {
+		width: 90%;
+		right: calc(-2 * var(--time-signature-position));
+		transform: translateX(-5%);
+		bottom: 25%;
+	}
+
+	.metronome-body .time-signature-adjuster-instance {
+		width: 40%;
+		right: -10%;
+		z-index: 9;
+	}
+
+	.metronome-body .time-signature-adjuster-ruler,
+	.metronome-body .time-signature-adjuster-numbers {
+		width: 90%;
+		right: -50%;
+		bottom: 5%;
+		z-index: -1;
+	}
+
+	.metronome-body
+		.time-signature-adjuster-instance.dragging
+		~ .time-signature-adjuster-ruler,
+	.metronome-body
+		.time-signature-adjuster-instance.dragging
+		~ .time-signature-adjuster-numbers {
+		transform: translateY(3pt) translateX(-5%);
+		opacity: 1;
+	}
+
+	.metronome-body .time-signature-adjuster-numbers .numbers {
+		font-size: 8pt;
+		left: calc(var(--time-signature-position) * 6.1 + 0.8rem);
+	}
+
+	.metronome-body .time-signature-adjuster-numbers .numbers .number {
+		margin-right: 0.8rem;
+		font-size: 12px;
+		height: 16px;
+		width: 16px;
+	}
+
+	.metronome-body .swing .tempo-set {
+		height: 10%;
+		width: 10%;
+	}
+
+	.metronome-body .swing .swing-instance {
+		width: 15%;
+	}
+
+	.metronome.swinging .metronome-body .swing .swing-instance {
+		width: 40%;
+	}
+
+	.extended-ui {
+		margin: 10px auto;
+		padding: 15px;
+		max-width: 90%;
+	}
+
+	#bpm-input {
+		width: 80px;
+		font-size: 18px;
+		padding: 10px;
+	}
+
+	.tools {
+		gap: 8px;
+	}
+
+	.tools button {
+		width: 32px;
+		height: 32px;
+	}
+
+	.tools button img {
+		width: 20px;
+		height: 20px;
+	}
+
+	.hud {
+		inset: auto 10px 10px auto;
+	}
+
+	.hud h1 {
+		font-size: 10px;
+	}
+
+	.hud p {
+		font-size: 7px;
+	}
+
+	.beats {
+		bottom: 10pt;
+		gap: 5px;
+	}
+
+	.beat {
+		width: 4px;
+		height: 4px;
+	}
+
+	.metronome.dragging {
+		.metronome-body {
+			transform: translateX(-10%);
+		}
+		.metronome-body > .swing > .tempo-set,
+		.metronome-body > .swing > .swing-instance {
+			filter: drop-shadow(0 0 5px var(--color-shadow));
+			-webkit-filter: drop-shadow(0 0 5px var(--color-shadow));
+		}
+		.metronome-tempo-background {
+			opacity: 0.6;
+			transition: 2s;
+		}
+		.metronome-panel .ui > .tempo {
+			opacity: 1;
+		}
+		.metronome-panel .ui > .tempo::before {
+			opacity: 1;
+			width: 100%;
+		}
+		.metronome-panel .ui > span.almost-reaches-top {
+			opacity: 1;
+		}
+	}
+
+	.metronome:not(.dragging) .metronome-panel .ui > .tempo {
+		transform: translateX(-15%);
+	}
+}
+
+.preset-button {
+	user-select: none;
+	z-index: 50;
+	border-radius: 50% !important;
+}
+
+.extended-ui {
+	background: var(--color-bg-alt);
+	border: 1px solid var(--color-border);
+	padding: 10px;
+	border-radius: 17px;
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.children-menu button {
+	display: block;
+	width: 100%;
+	padding: 5px;
+	margin-bottom: 5px;
+	background: var(--color-primary);
+	color: var(--color-text);
+	border: none;
+	border-radius: 3px;
+	cursor: pointer;
+}
+
+.children-menu button:hover {
+	background: var(--color-accent);
+}
+
+.tempo-nodes {
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 100vh;
+	width: 100vw;
+	z-index: 99999;
+	pointer-events: none;
+}
+
+.tempo-nodes .node {
+	background-color: var(--color-text);
+	color: var(--color-bg);
+	height: 50px;
+	width: 50px;
+	display: flex;
+	flex-direction: column;
+	border-radius: 25px;
+	position: absolute;
+	top: 100px;
+	left: 100px;
+	padding: 0 15px;
+
+	user-select: none;
+	pointer-events: all;
+
+	transition:
+		0.5s,
+		top 0s,
+		left 0s;
+
+	.collapse-btn,
+	.details {
+		display: none;
+	}
+
+	&.apply-glass {
+		background: #ffffff10;
+		color: var(--color-text);
+		backdrop-filter: url(#cricle-filter);
+	}
+}
+
+.tempo-nodes .node .handle {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	height: 50px;
+	cursor: pointer;
+	z-index: 100;
+}
+
+.tempo-nodes .node .tempo {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	transition: all 2.5s;
+	margin: 0;
+
+	input {
+		outline: none;
+		border: none;
+		field-sizing: content;
+		background: transparent;
+		pointer-events: none;
+		user-select: none;
+		transition: 0.3s;
+	}
+}
+
+.tempo-nodes .node.expanded .handle {
+	top: 10px;
+	background: var(--color-secondary);
+	left: 50%;
+	transform: translateX(-50%);
+	right: unset;
+	width: 50px;
+	height: 5px;
+	border-radius: 10px;
+}
+
+.tempo-nodes .node.expanded .tempo {
+	margin: 0.5rem;
+	position: absolute;
+	top: 0.75rem;
+	left: 5px;
+	transform: none;
+	transition: all 0s;
+
+	input {
+		pointer-events: all;
+		border-bottom: 1px solid var(--color-bg);
+	}
+}
+
+.tempo-nodes .node.expanded {
+	height: 170px;
+	width: 170px;
+
+	.collapse-btn,
+	.details {
+		display: flex;
+	}
+}
+
+.tempo-nodes .node.expanded .details {
+	margin-top: 3.5rem;
+	flex-direction: column;
+
+	.time-signature > input {
+		field-sizing: content !important;
+		outline: none;
+		border: none;
+		border-bottom: 1px solid var(--color-bg);
+	}
+}
+
+.safari-button {
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+	box-sizing: border-box;
+	border: none;
+
+	/* 1. Exact color match from your screenshot */
+	background-color: #ebebeb;
+
+	/* 2. Increased corner radius to match the exact curve */
+	border-radius: 6px;
+
+	/* 3. Typography tweaks for the correct letter tracking and smoothing */
+	font-family:
+		-apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif;
+	font-weight: 500;
+	font-size: 11px;
+	color: #242424;
+	-webkit-font-smoothing: antialiased;
+
+	/* 4. Tighter padding to center the text exactly like yours */
+	padding: 1px 3px;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	margin: 6px;
+
+	cursor: default;
+	user-select: none;
+
+	transform: scale(1.1);
+}
+
+.safari-button:active {
+	background-color: #dedede;
+}
